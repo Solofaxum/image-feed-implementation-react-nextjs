@@ -1,10 +1,11 @@
-import { Character } from "@/components";
 
+import { fetchCharacters } from '../app/api/api';
+import CharacterList from '../components/characterList';
+import { CharacterApi } from '../app/util/type';
 
-export default function Home() {
-  return (
-    <main className='overflow-hiden'>
-      <Character />
-    </main>
-  )
+const Home: React.FC = async () => {
+  const data: Promise<CharacterApi> = fetchCharacters()
+  const allCharacters = (await data).results;
+  return <CharacterList allCharacters={allCharacters} />
 }
+export default Home;
